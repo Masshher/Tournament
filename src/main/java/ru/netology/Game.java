@@ -6,11 +6,6 @@ import java.util.List;
 
 public class Game {
 
-//    List<Player> listOfPlayers = new ArrayList<>();
-//
-//    public void register(Player player) {
-//        listOfPlayers.add(player);
-//    }
 
     HashMap<String, Player> listOfPlayers = new HashMap<>();
     public void register(String name, Player player) {
