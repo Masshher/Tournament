@@ -3,6 +3,8 @@ package ru.netology;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 public class GameTest {
 
     Player player1 = new Player(1, "player1", 10);
@@ -15,9 +17,24 @@ public class GameTest {
     Game game = new Game();
 
     @Test
+    public void findAPlayer() {
+        game.register("player1", player1);
+        game.register("player2", player2);
+        game.register("player3", player3);
+        game.register("player4", player4);
+        game.register("player5", player5);
+        game.register("player6", player6);
+
+        Player expected = player1;
+        Player actual = game.findInfo("player1");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void FirstPlayerWinBothPlayersRegistered() {
-        game.register(player2);
-        game.register(player1);
+        game.register("player2", player2);
+        game.register("player1", player1);
 
         int expected = 1;
         int actual = game.round("player2", "player1");
@@ -27,8 +44,8 @@ public class GameTest {
 
     @Test
     public void SecondPlayerWinsBothPlayersRegistered() {
-        game.register(player4);
-        game.register(player6);
+        game.register("player4", player4);
+        game.register("player6", player6);
 
         int expected = -1;
         int actual = game.round("player4", "player6");
@@ -38,8 +55,8 @@ public class GameTest {
 
     @Test
     public void drawBothPlayersRegistered() {
-        game.register(player3);
-        game.register(player5);
+        game.register("player3", player3);
+        game.register("player5", player5);
 
         int expected = 0;
         int actual = game.round("player3", "player5");
@@ -49,14 +66,14 @@ public class GameTest {
 
     @Test
     public void firstPlayerNotRegistered() {
-        game.register(player2);
+        game.register("player2", player2);
 
         Assertions.assertThrows(NotRegisteredException.class, ()-> {game.round("player1", "player2");});
     }
 
     @Test
     public void TheSecondPlayerNotRegistered() {
-        game.register(player3);
+        game.register("player3", player3);
 
         Assertions.assertThrows(NotRegisteredException.class, ()-> {game.round("player3", "player4");});
     }
